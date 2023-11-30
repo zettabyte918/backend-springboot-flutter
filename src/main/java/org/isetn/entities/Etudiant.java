@@ -18,22 +18,24 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
 public class Etudiant {
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nom;
 	private String prenom;
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dateNais;
-	
-    @ManyToOne
+
+	@ManyToOne
 	private Formation formation;
-	
-    @ManyToOne
+
+	@ManyToOne
 	private Classe classe;
 }
