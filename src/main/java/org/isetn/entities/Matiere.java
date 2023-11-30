@@ -21,7 +21,6 @@ public class Matiere {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matiereId;
-
     private String matiereName;
 
     // constructors, getters, and setters

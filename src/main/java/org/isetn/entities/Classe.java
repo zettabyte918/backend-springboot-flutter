@@ -29,7 +29,7 @@ public class Classe {
 	@OneToMany(mappedBy = "classe")
 	private List<Etudiant> etudiants;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "classe_matiere", joinColumns = @JoinColumn(name = "classe_id"), inverseJoinColumns = @JoinColumn(name = "matiere_id"))
 	private Set<Matiere> matieres = new HashSet<>();
 

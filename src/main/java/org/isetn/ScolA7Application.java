@@ -11,6 +11,7 @@ import org.isetn.entities.User;
 import org.isetn.repository.ClasseRepository;
 import org.isetn.repository.EtudiantRepository;
 import org.isetn.repository.FormationRepository;
+import org.isetn.repository.MatiereRepository;
 import org.isetn.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -35,6 +36,9 @@ public class ScolA7Application implements CommandLineRunner {
 	@Autowired
 	private RepositoryRestConfiguration repositoryRestConfiguration;
 
+	@Autowired
+	private MatiereRepository matiereRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(ScolA7Application.class, args);
 	}
@@ -48,9 +52,10 @@ public class ScolA7Application implements CommandLineRunner {
 		Formation f2 = formationRepository.save(new Formation(null, "J2EE", 10, null));
 		Formation f3 = formationRepository.save(new Formation(null, "Angular", 120, null));
 
-		Matiere m1 = new Matiere(null, "Flutter");
-		Matiere m2 = new Matiere(null, "Devops");
-		Matiere m3 = new Matiere(null, "Springboot");
+		// Create Matiere instances
+		Matiere m1 = matiereRepository.save(new Matiere(null, "Flutter"));
+		Matiere m2 = matiereRepository.save(new Matiere(null, "Devops"));
+		Matiere m3 = matiereRepository.save(new Matiere(null, "Springboot"));
 
 		Classe c1 = new Classe(null, "DSI31", 27, null);
 		Classe c2 = new Classe(null, "DSI32", 25, null);
