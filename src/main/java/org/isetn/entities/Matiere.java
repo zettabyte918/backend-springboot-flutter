@@ -22,6 +22,7 @@ public class Matiere {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matiereId;
     private String matiereName;
+    private double matiereCoef;
 
     // constructors, getters, and setters
 }

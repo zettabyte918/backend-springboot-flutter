@@ -53,9 +53,9 @@ public class ScolA7Application implements CommandLineRunner {
 		Formation f3 = formationRepository.save(new Formation(null, "Angular", 120, null));
 
 		// Create Matiere instances
-		Matiere m1 = matiereRepository.save(new Matiere(null, "Flutter"));
-		Matiere m2 = matiereRepository.save(new Matiere(null, "Devops"));
-		Matiere m3 = matiereRepository.save(new Matiere(null, "Springboot"));
+		Matiere m1 = matiereRepository.save(new Matiere(null, "Flutter", 1.5));
+		Matiere m2 = matiereRepository.save(new Matiere(null, "Devops", 1.5));
+		Matiere m3 = matiereRepository.save(new Matiere(null, "Springboot", 1.5));
 
 		Classe c1 = new Classe(null, "DSI31", 27, null);
 		Classe c2 = new Classe(null, "DSI32", 25, null);
