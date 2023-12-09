@@ -23,6 +23,7 @@ public class Matiere {
     private Long matiereId;
     private String matiereName;
     private double matiereCoef;
+    private double matiereNbh;
 
     // constructors, getters, and setters
 }
