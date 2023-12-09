@@ -19,8 +19,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Absence {
-    public Absence(Etudiant et1, Matiere m1, Date date2) {
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +32,7 @@ public class Absence {
     @JoinColumn(name = "matiere_id")
     private Matiere matiere;
 
+    private double absenceNb;
     private LocalDateTime date;
 
     // constructors, getters, and setters

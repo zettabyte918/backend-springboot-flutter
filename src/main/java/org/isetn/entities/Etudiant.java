@@ -33,6 +33,7 @@ public class Etudiant {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dateNais;
 
+	@JsonIgnore
 	@ManyToOne
 	private Formation formation;
 

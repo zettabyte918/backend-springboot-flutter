@@ -98,6 +98,7 @@ public class ScolA7Application implements CommandLineRunner {
 		Absence ab1 = new Absence();
 		ab1.setEtudiant(et1);
 		ab1.setMatiere(m3);
+		ab1.setAbsenceNb(1.5);
 		ab1.setDate(absenceDate);
 		absenceRepository.save(ab1);
 	}
