@@ -35,6 +35,11 @@ public class MatierController {
 		return matierRepository.findAll();
 	}
 
+	@GetMapping("/byClass")
+	public List<Matiere> getByClass() {
+		return matierRepository.findAll();
+	}
+
 	@DeleteMapping("/delete")
 	public void delete(@Param("id") Long id) {
 		Matiere m = matierRepository.findById(id).get();
