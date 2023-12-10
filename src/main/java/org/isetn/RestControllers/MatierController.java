@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,19 +25,20 @@ public class MatierController {
 	@Autowired
 	private MatiereRepository matierRepository;
 
-	@PostMapping("/add")
-	public Matiere add(@RequestBody Matiere matier) {
+	@Autowired
+	private ClasseRepository classeRepository;
+
+	@PostMapping("/add/{codClass}")
+	public Matiere add(@PathVariable("codClass") Long codClass, @RequestBody Matiere matier) {
 		System.out.println(matier.toString());
+
+		// add matiere to this class id codClass
+		classeRepository.findById(codClass).get().getMatieres().add(matier);
 		return matierRepository.save(matier);
 	}
 
 	@GetMapping("/all")
 	public List<Matiere> getAll() {
-		return matierRepository.findAll();
-	}
-
-	@GetMapping("/byClass")
-	public List<Matiere> getByClass() {
 		return matierRepository.findAll();
 	}
 
