@@ -3,7 +3,9 @@ package org.isetn.RestControllers;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.isetn.entities.Absence;
 import org.isetn.entities.Classe;
@@ -15,6 +17,7 @@ import org.isetn.repository.AbsenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +34,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class AbsenceController {
 	@Autowired
 	private AbsenceRepository AbsenceRepository;
+
+	@GetMapping("/getByMatiereIdAndDateWithTotal")
+	public ResponseEntity<Map<String, Object>> findByMatiereIdAndDateWithTotal(
+			@RequestParam Long matiereId,
+			@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+
+		LocalDateTime startDateTime = LocalDateTime.of(date, LocalTime.MIN);
+		LocalDateTime endDateTime = LocalDateTime.of(date, LocalTime.MAX);
+
+		List<Absence> absences = AbsenceRepository
+				.findByMatiereMatiereIdAndDateBetween(matiereId, startDateTime, endDateTime);
+
+		// Calculate total absence hours for each student
+		Map<Long, Double> etudiantTotalHoursMap = new HashMap<>();
+
+		for (Absence absence : absences) {
+			Long etudiantId = absence.getEtudiant().getId();
+			double absenceHours = absence.getAbsenceNb();
+
+			etudiantTotalHoursMap.merge(etudiantId, absenceHours, Double::sum);
+		}
+
+		// Create a response map
+		Map<String, Object> response = new HashMap<>();
+		response.put("absences", absences);
+		response.put("etudiantTotalHours", etudiantTotalHoursMap);
+
+		return ResponseEntity.ok(response);
+	}
 
 	@GetMapping("/getByMatiereIdAndDate")
 	public List<Absence> findByMatiereIdAndDate(
